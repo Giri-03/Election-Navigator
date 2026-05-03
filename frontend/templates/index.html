@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Election Navigator</title>
+  <link rel="stylesheet" href="/static/css/main.css" />
+</head>
+<body>
+
+  <!-- Background layer: gradient + grid + glow -->
+  <div class="bg-layer"></div>
+
+  <!-- =====================================================
+       SCREEN 1 — Landing
+       ===================================================== -->
+  <section id="screen-landing" class="screen active">
+    <p class="landing-eyebrow">Election Commission of India · Voter Guide</p>
+
+    <h1 class="landing-heading">
+      Your Vote.<br><span>Your Journey.</span>
+    </h1>
+
+    <p class="landing-sub">
+      A step-by-step navigator that checks your eligibility,
+      builds your personal checklist, and guides you to the booth.
+    </p>
+
+    <button class="btn-cta" id="btn-start">
+      Start your voting journey
+      <span aria-hidden="true">→</span>
+    </button>
+  </section>
+
+  <!-- =====================================================
+       SCREEN 2 — Onboarding (profile collection)
+       ===================================================== -->
+  <section id="screen-onboarding" class="screen">
+    <div class="onboarding-wrap">
+
+      <!-- Step progress dots (5 profile fields) -->
+      <div class="step-dots" id="step-dots">
+        <div class="step-dot active" data-index="0"></div>
+        <div class="step-dot" data-index="1"></div>
+        <div class="step-dot" data-index="2"></div>
+        <div class="step-dot" data-index="3"></div>
+        <div class="step-dot" data-index="4"></div>
+      </div>
+
+      <!-- Question panel — content injected by JS -->
+      <div class="question-panel" id="question-panel">
+        <span class="question-label">Step <span id="q-step">1</span> of 5</span>
+        <p class="question-text" id="q-text">Loading…</p>
+        <p class="question-hint" id="q-hint"></p>
+        <p class="question-error" id="q-error"></p>
+
+        <!-- Text input (shown for age / state) -->
+        <div class="input-row" id="input-text-row">
+          <input
+            type="text"
+            class="question-input"
+            id="q-input"
+            placeholder="Type your answer…"
+            autocomplete="off"
+          />
+          <button class="btn-submit" id="btn-submit">→</button>
+        </div>
+
+        <!-- Yes / No buttons (shown for boolean fields) -->
+        <div class="yesno-row" id="input-yesno-row" style="display:none;">
+          <button class="btn-yesno" data-value="yes">Yes</button>
+          <button class="btn-yesno" data-value="no">No</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- =====================================================
+       SCREEN 3 — Main Dashboard
+       ===================================================== -->
+  <section id="screen-dashboard" class="screen">
+
+    <!-- LEFT PANEL -->
+    <aside class="panel-left" id="panel-left">
+
+      <div>
+        <p class="panel-section-title">Status</p>
+        <span class="status-badge eligible" id="status-badge">Eligible</span>
+      </div>
+
+      <div class="profile-summary" id="profile-summary">
+        <p class="panel-section-title">Your Profile</p>
+        <div class="profile-row">
+          <span class="label">Age</span>
+          <span class="value" id="p-age">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="label">State</span>
+          <span class="value" id="p-state">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="label">First-time voter</span>
+          <span class="value" id="p-ftv">—</span>
+        </div>
+        <div class="profile-row">
+          <span class="label">Voter ID</span>
+          <span class="value" id="p-hid">—</span>
+        </div>
+      </div>
+
+      <div class="confidence-wrap">
+        <p class="panel-section-title">Voting Readiness</p>
+        <div class="confidence-value" id="confidence-value">0%</div>
+        <div class="confidence-track">
+          <div class="confidence-fill" id="confidence-fill"></div>
+        </div>
+        <p class="confidence-sub">Based on completed checklist steps</p>
+      </div>
+
+    </aside>
+
+    <!-- RIGHT PANEL -->
+    <main class="panel-right">
+
+      <!-- Timeline -->
+      <div class="timeline-wrap">
+        <p class="panel-section-title">Election Timeline</p>
+        <div class="timeline-track" id="timeline-track">
+          <!-- Nodes injected by JS -->
+        </div>
+      </div>
+
+      <!-- Alert banner (what-if / not-eligible) — hidden by default -->
+      <div class="alert-banner" id="alert-banner" style="display:none;">
+        <p class="alert-title" id="alert-title">Alert</p>
+        <p class="alert-message" id="alert-message"></p>
+        <button class="btn-back" id="btn-back-flow">← Back to main flow</button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-header">
+          <span>Journey Progress</span>
+          <span id="progress-pct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- Checklist -->
+      <div class="checklist-wrap">
+        <div class="checklist-header">
+          <h2 class="checklist-title">Your Checklist</h2>
+          <button class="btn-export" id="btn-export">↓ Export</button>
+        </div>
+        <div id="checklist-list">
+          <!-- Step cards injected by JS -->
+        </div>
+      </div>
+
+    </main>
+  </section>
+
+  <!-- JS modules -->
+  <script src="/static/js/onboarding.js"></script>
+  <script src="/static/js/timeline.js"></script>
+  <script src="/static/js/checklist.js"></script>
+  <script src="/static/js/progress.js"></script>
+  <script src="/static/js/confidence.js"></script>
+  <script src="/static/js/whatif.js"></script>
+  <script src="/static/js/export.js"></script>
+  <script src="/static/js/app.js"></script>
+</body>
+</html>
