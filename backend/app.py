@@ -10,7 +10,6 @@ app = Flask(
     template_folder=os.path.join(BASE_DIR, "../frontend/templates"),
     static_folder=os.path.join(BASE_DIR, "../frontend/static"),
 )
-)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key-change-in-prod")
 
 
